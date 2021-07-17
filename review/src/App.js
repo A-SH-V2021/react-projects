@@ -9,7 +9,7 @@ const App = () => {
           <h2>reviews </h2>
           <div className="underline"></div>
         </div>
-        <Reveiw />
+        <Reveiw/>
       </section>
     </main>
   );
