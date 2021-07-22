@@ -1,45 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import { FaQuoteRight } from "react-icons/fa";
 import data from "./data";
+import Header from "./components/Header";
+import Main from "./components/Main";
+import Button from "./components/Button";
+import Footer from "./components/Footer";
 
 const App = () => {
-  const [persons, setPersons] = useState(data);
+  const [persons] = useState(data);
   const [idx, setIdx] = useState(0);
+
+  const incrementHandle = () => {
+    const lastItem = persons.length - 2;
+    if (idx > lastItem) {
+      return setIdx(0);
+    }
+    setIdx(idx + 1);
+  };
+
+  const decrementHandle = () => {
+    const lastItem = persons.length - 1;
+
+    if (idx === 0) {
+      return setIdx(lastItem);
+    }
+    setIdx(idx - 1);
+  };
+
+  useEffect(() => {
+    let handle = setInterval(() => {
+      const lastItem = persons.length - 2;
+      if (idx > lastItem) {
+        return setIdx(0);
+      }
+      setIdx(idx + 1);
+    }, 3000);
+    return () => {
+      clearInterval(handle);
+    };
+  }, [idx]);
 
   return (
     <section className="section">
-      <div className="title">
-        <h2>
-          <span>/</span>review
-        </h2>
-      </div>
+      <Header />
       <div className="section-center">
-        {persons.map((item, personIdx) => {
-          const { id, name, title, image, quote } = item;
-
-          let position = 'nextSlide'
-          if (personIdx === idx) {
-            position="activeSlide"
-          }
-          
-          return (
-            <article key={id} className={position}>
-              <img src={image} alt={name} className="person-img" />
-              <h4 className="">{name}</h4>
-              <p className="title">{title}</p>
-              <p className="text">{quote}</p>
-              <FaQuoteRight className="icon" />
-            </article>
-          );
-        })}
-        <button className="prev">
+        <Main idx={idx} persons={persons} />
+        <Button classes={`prev`} clickHandle={decrementHandle}>
           <FiChevronLeft />
-        </button>
-        <button className="next">
+        </Button>
+        <Button classes={`next`} clickHandle={incrementHandle}>
           <FiChevronRight />
-        </button>
+        </Button>
       </div>
+      <Footer/>
     </section>
   );
 };
