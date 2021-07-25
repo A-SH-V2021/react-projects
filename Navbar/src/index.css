@@ -162,7 +162,13 @@ nav {
   transform: rotate(-90deg);
 }
 .logo {
+  display: flex;
   height: 40px;
+  color: rgb(0, 162, 255);
+  font-size: 1.5rem;
+}
+.logo-title{
+  margin-left: 0.4rem;
 }
 .links a {
   color: var(--clr-grey-3);
