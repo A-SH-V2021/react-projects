@@ -16,7 +16,7 @@ console.log(value);
             <FaBars />
           </button>
         </div>
-        <div className="links-container show-container">
+        <div className={value ? "links-container show-container" : "links-container"}>
           <ul className="links">
             {links.map((link) => {
               const { id, url, text } = link;
