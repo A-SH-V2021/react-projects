@@ -264,12 +264,19 @@ Grocery List
   letter-spacing: 2px;
   transition: var(--transition);
 }
+.btn-container{
+  width: 2.5rem;
+  background-color: transparent;
+  border: transparent;
+  display: flex;
+  justify-content: space-between;
+}
 .edit-btn,
 .delete-btn {
   background: transparent;
   border-color: transparent;
   cursor: pointer;
-  font-size: 0.7rem;
+  font-size: 0.9rem;
   margin: 0 0.15rem;
   transition: var(--transition);
 }
