@@ -9,8 +9,8 @@ const App = () => {
     <>
      
        <Navbar/>
-       <Sidebar/>
        <Hero/>
+       <Sidebar/>
        <Submenu/>
      
     </>
