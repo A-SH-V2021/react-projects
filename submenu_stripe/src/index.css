@@ -371,7 +371,11 @@ Stripe Styles
   }
 }
 
-/* links */
+/* 
+==================
+submenu links 
+==================
+*/
 .submenu {
   background: var(--clr-white);
   box-shadow: var(--dark-shadow);

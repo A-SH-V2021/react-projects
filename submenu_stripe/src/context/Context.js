@@ -4,8 +4,8 @@ const AppContxt = React.createContext();
 
 export const AppProvider = ({ children }) => {
   const [isSidebar, setIsSidebar] = useState(false);
-  const [isSubmenu, setIsSubmenu] = useState(true);
-
+  const [isSubmenu, setIsSubmenu] = useState(false);
+  const [location, setLocation] = useState({});
   const openSidebar = () => {
     setIsSidebar(true);
   };
@@ -13,7 +13,8 @@ export const AppProvider = ({ children }) => {
     setIsSidebar(false);
   };
 
-  const openSubmenu = () => {
+  const openSubmenu = (txt, cordinate) => {
+    setLocation(cordinate);
     setIsSubmenu(true);
   };
   const closeSubmenu = () => {
@@ -25,6 +26,7 @@ export const AppProvider = ({ children }) => {
       value={{
         isSidebar,
         isSubmenu,
+        location,
         openSidebar,
         openSubmenu,
         closeSidebar,
@@ -37,5 +39,5 @@ export const AppProvider = ({ children }) => {
 };
 
 export const useGlobalContxt = () => {
- return useContext(AppContxt)
+  return useContext(AppContxt);
 };

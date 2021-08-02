@@ -6,8 +6,6 @@ import sublinks from "../data";
 const Sidemenu = () => {
   const { isSidebar, closeSidebar } = useGlobalContxt();
 
-  
-
   return (
     <aside
       className={`${isSidebar ? "sidebar-wrapper show" : "sidebar-wrapper"}`}
@@ -16,27 +14,28 @@ const Sidemenu = () => {
         <button className="close-btn" onClick={closeSidebar}>
           <FaTimes />
         </button>
-      <div className="sidebar-links">
-        {sublinks.map((item, idx) => {
-          const { page, links } = item;
-         
-          return (
-            <article key={idx}>
-              <h4>{page}</h4>
-              <div className="sidebar-sublinks">
-                {links.map((link,idx)=>{
-                  const {url,icon,label} = link
-                  return  <a href={url} key={idx}>
-                    {icon}{label}
-                    </a>
+        <div className="sidebar-links">
+          {sublinks.map((item, idx) => {
+            const { page, links } = item;
 
-                  
-                })}
-              </div>
-            </article>
-          );
-        })}
-      </div>
+            return (
+              <article key={idx}>
+                <h4>{page}</h4>
+                <div className="sidebar-sublinks">
+                  {links.map((link, idx) => {
+                    const { url, icon, label } = link;
+                    return (
+                      <a href={url} key={idx}>
+                        {icon}
+                        {label}
+                      </a>
+                    );
+                  })}
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </aside>
   );
