@@ -3,7 +3,7 @@ import { FaBars } from "react-icons/fa";
 import { useGlobalContxt } from "../context/Context";
 
 const Navbar = () => {
-  const { openSidebar, openSubmenu, closeSubmenu } = useGlobalContxt();
+  const { openSidebar, openSubmenu } = useGlobalContxt();
 
   const openSubmenuHandle = (e) => {
     const page=e.target.textContent

@@ -1,8 +1,13 @@
 import React from "react";
+import { useGlobalContxt } from '../context/Context'
 import phoneImg from "../images/phone.svg";
+
+
+
 const Hero = () => {
+ const {closeSubmenu}= useGlobalContxt()
   return (
-    <section className="hero">
+    <section className="hero" onMouseOver={closeSubmenu}>
       <div className="hero-center">
         <article className="hero-info">
           <h1>it is just test project of react</h1>
