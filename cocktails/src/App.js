@@ -18,7 +18,7 @@ const App = () => {
         <Route path="/" exact component={Home} />
         <Route path="/about" component={About} />
         <Route path="/cocktail/:id" component={SingleCocktail} />
-        <Route path="/error" component={Error} />
+        <Route path="*" component={Error} />
       </Switch>
     </Router>
   );

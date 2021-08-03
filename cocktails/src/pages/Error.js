@@ -1,11 +1,16 @@
-import React from 'react'
-
+import React from "react";
+import { Link } from "react-router-dom";
 const Error = () => {
-    return (
-        <div>
-           <h3>error page</h3> 
-        </div>
-    )
-}
+  return (
+    <section className="error-page section">
+      <div className="error-container">
+        <h3>opps! this page dosn't exist</h3>
+        <Link to="/" className="btn">
+          back home
+        </Link>
+      </div>
+    </section>
+  );
+};
 
-export default Error
+export default Error;
