@@ -202,3 +202,12 @@ Error
   text-transform: capitalize;
   margin: 4rem;
 }
+.loading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loading img{
+  width: 4rem;
+
+}
