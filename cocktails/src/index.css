@@ -203,11 +203,13 @@ Error
   margin: 4rem;
 }
 .loading{
+  width: 100wv;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .loading img{
-  width: 4rem;
+  width: 5rem;
 
 }
