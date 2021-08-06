@@ -29,7 +29,7 @@ export const AppProvider = ({ children }) => {
         });
         setCocktails(newItem)
       } else {
-        setSearchItem([]);
+        setCocktails([]);
       }
       setLoading(false);
     } catch (error) {
