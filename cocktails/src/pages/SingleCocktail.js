@@ -1,9 +1,10 @@
 import React from 'react'
+import SingleCock from '../Components/SingleCock'
 
 const SingleCocktail = () => {
     return (
         <div>
-            <h2>singleCocktail page</h2>
+           <SingleCock/>
         </div>
     )
 }
