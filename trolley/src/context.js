@@ -1,4 +1,4 @@
-import React, { useState, useContext, useReducer, useEffect } from "react";
+import React, { useContext, useReducer, useEffect } from "react";
 import cartItems from "./data";
 import reducer from "./reducer";
 
@@ -23,10 +23,17 @@ const AppProvider = ({ children }) => {
 const remove = (id) => {
   return dispatch({type:'REMOVE',id})
 }
+const increase = (id) => {
+  return dispatch({type:'INCREASE',id})
+}
+const decrease = (id) => {
+  return dispatch({type:'DECREASE',id})
+}
+
 
 
   return (
-    <AppContext.Provider value={{ ...state,clearCart,remove }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ ...state,clearCart,remove,increase,decrease}}>{children}</AppContext.Provider>
   );
 };
 // make sure use
