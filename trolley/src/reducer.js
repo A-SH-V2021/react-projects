@@ -1,3 +1,4 @@
+// import Loading from './Loading'
 const reducer = (state, action) => {
   if (action.type === "CLEAR_ITEMS") {
     return { ...state, cart: [] };
@@ -52,6 +53,16 @@ const reducer = (state, action) => {
     total = parseFloat(total.toFixed(2));
     return { ...state, total, amount };
   }
+
+  if (action.type==='LOADEING') {
+    return {...state,loading:true}
+  }
+
+  if (action.type==='DISPLAY') {
+    
+    return {...state,cart:action.data,loading:false}
+  }
+  
   return state;
 };
 
