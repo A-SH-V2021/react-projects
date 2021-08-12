@@ -1,3 +1,14 @@
-const paginate = () => {}
 
-export default paginate
+
+const paginate = (followers) => {
+  const itemPerPage = 8;
+  const pages = Math.ceil(followers.length / itemPerPage);
+  console.log(itemPerPage);
+const newArray= Array.from({length:pages},(_,index)=>{
+    const start = index* itemPerPage
+return  followers.slice(start,start+itemPerPage)
+})
+  return newArray
+};
+
+export default paginate;
