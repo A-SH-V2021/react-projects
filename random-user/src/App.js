@@ -20,6 +20,43 @@ const App = () => {
   const hoverHandle = () => {
     console.log(``);
   };
+  const fetchHandle = async () => {
+    const response = await fetch(url);
+    const data = await response.json();
+    const person = data.results[0];
+    const {
+      picture: { large: image },
+    } = person;
+    const {
+      name: { first, last },
+    } = person;
+    const {
+      location: {
+        street: { name: nameStr, number: numStr },
+      },
+    } = person;
+    const {
+      dob: { age },
+    } = person;
+    const { email, phone } = person;
+    const newPerson = {
+      image,
+      name:`${first} ${last}`,
+      street:`${numStr} ${nameStr}`,
+      age,
+      email,
+      phone,
+    };
+    console.log(newPerson);
+    setPerson(newPerson);
+    setLoading(false);
+    // setTitle()
+    setValue(newPerson.name)
+  };
+
+  useEffect(() => {
+    fetchHandle();
+  }, []);
 
   return (
     <main>
@@ -27,7 +64,7 @@ const App = () => {
       <div className="block">
         <div className="container">
           <img
-            src={(person && person.img) || defaultImage}
+            src={(person && person.image) || defaultImage}
             alt="random-img"
             className="user-img"
           />
@@ -74,7 +111,7 @@ const App = () => {
               <FaLock />
             </button>
           </div>
-          <button className="btn" type="button">
+          <button className="btn" type="button" onClick={fetchHandle}>
             {loading ? "loadin..." : "random user"}
           </button>
         </div>
