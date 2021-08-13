@@ -134,7 +134,7 @@ Pagination
   width: 8rem;
   height: 0.25rem;
   background: var(--clr-primary-5);
-  margin: 0 auto;
+  margin: 2rem  auto;
 }
 .followers {
   width: 90vw;
@@ -206,12 +206,13 @@ Pagination
 }
 .prev-btn,
 .next-btn {
+  width: 3rem;
   background: transparent;
   border-color: transparent;
   font-weight: bold;
   text-transform: capitalize;
   letter-spacing: var(--spacing);
-  margin: 0.5rem;
+  color: var(--clr-primary-5);
   font-size: 1rem;
   cursor: pointer;
 }
@@ -219,6 +220,6 @@ Pagination
 @media screen and (min-width: 775px) {
   .btn-container {
     margin: 0 auto;
-    max-width: 700px;
+    max-width: 768px;
   }
 }

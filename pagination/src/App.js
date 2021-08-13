@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useFetch } from "./component/useFetch";
 import Follower from "./component/Followers";
+import { ReactComponent as Myback } from "./backwards-arrows-ablue.svg";
+import { ReactComponent as MyForward } from "./forward-arrows-arrow-blue.svg";
 
 const App = () => {
   const { loading, data } = useFetch();
@@ -11,11 +13,31 @@ const App = () => {
     if (loading) return;
     setFollowers(data[page]);
   }, [loading, page]);
-  console.log(data);
+ 
   const pageHandle = (idx) => {
     setPage(idx);
   };
-  return (
+const prevHandle = () => {
+ setPage((oldPage)=>{
+let nextPage=oldPage-1;
+if(nextPage<0){
+  nextPage=data.length-1
+}
+return nextPage
+ })
+}
+
+const nextHandle = () => {
+  setPage((oldPage)=>{
+ let nextPage=oldPage+1;
+ if(nextPage>data.length-1){
+   nextPage=0
+ }
+ return nextPage
+  })
+ }
+
+return (
     <main>
       <div className="section-title">
         <h1>{loading ? "Loading..." : "pagination"}</h1>
@@ -30,6 +52,10 @@ const App = () => {
 
         {!loading && (
           <div className="btn-container">
+            <div className="prev-btn" onClick={prevHandle}>
+              <Myback />
+            </div>
+
             {data.map((item, idx) => {
               return (
                 <button
@@ -41,6 +67,9 @@ const App = () => {
                 </button>
               );
             })}
+             <div className="next-btn" onClick={nextHandle}>
+              <MyForward />
+            </div>
           </div>
         )}
       </section>
