@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import loading from "./Ripple-200px.gif";
 
 import {
   FaEnvelopeOpen,
@@ -7,18 +6,25 @@ import {
   FaCalendarTimes,
   FaMap,
   FaPhone,
-  FaLock,
 } from "react-icons/fa";
+
 const url = "https://randomuser.me/api/";
 const defaultImage = "https://randomuser.me/api/portraits/women/63.jpg";
+
+
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [person, setPerson] = useState(null);
   const [title, setTitle] = useState("name");
   const [value, setValue] = useState("random user");
 
-  const hoverHandle = () => {
-    console.log(``);
+  const hoverHandle = (e) => {
+    
+    if (e.target.classList.contains('icon')) {
+     const newValue=e.target.dataset.lable
+    setTitle(newValue)
+     setValue(person[newValue])
+    }
   };
   const fetchHandle = async () => {
     const response = await fetch(url);
@@ -41,17 +47,16 @@ const App = () => {
     const { email, phone } = person;
     const newPerson = {
       image,
-      name:`${first} ${last}`,
-      street:`${numStr} ${nameStr}`,
+      name: `${first} ${last}`,
+      street: `${numStr} ${nameStr}`,
       age,
       email,
       phone,
     };
-    console.log(newPerson);
     setPerson(newPerson);
     setLoading(false);
-    // setTitle()
-    setValue(newPerson.name)
+    // setTitle('name')
+    setValue(newPerson.name);
   };
 
   useEffect(() => {
@@ -80,7 +85,7 @@ const App = () => {
             </button>
             <button
               className="icon"
-              data-lable="emai"
+              data-lable="email"
               onMouseOver={hoverHandle}
             >
               <FaEnvelopeOpen />
@@ -101,14 +106,6 @@ const App = () => {
               onMouseOver={hoverHandle}
             >
               <FaPhone />
-            </button>
-
-            <button
-              className="icon"
-              data-lable="pass"
-              onMouseOver={hoverHandle}
-            >
-              <FaLock />
             </button>
           </div>
           <button className="btn" type="button" onClick={fetchHandle}>
