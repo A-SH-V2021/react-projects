@@ -2,8 +2,16 @@ import React, { useState, useEffect } from "react";
 
 let element = document.getElementsByTagName("html")[0];
 
+const getThemeFromLS = () => {
+  let theme = "light-mode";
+  if (localStorage.getItem("theme")) {
+    theme = localStorage.getItem("theme");
+  }
+  return theme;
+};
+
 const App = () => {
-  let [theme, setTheme] = useState("light-mode");
+  let [theme, setTheme] = useState(getThemeFromLS());
 
   const changeModeHandle = () => {
     if (theme === "light-mode") {
@@ -15,11 +23,17 @@ const App = () => {
 
   useEffect(() => {
     element.className = theme;
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   return (
     <main>
-      <button className={`btn ${(theme === "light-mode")? 'btn-light btn-light:hover': ''}`} onClick={changeModeHandle}>
+      <button
+        className={`btn ${
+          theme === "light-mode" ? "btn-light btn-light:hover" : ""
+        }`}
+        onClick={changeModeHandle}
+      >
         change mode
       </button>
       <div className="section-center">
