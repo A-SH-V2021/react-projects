@@ -10,7 +10,7 @@ const clientID = `?client_id=${process.env.REACT_APP_ACCESS_WEB}`;
 const App = () => {
   const [loading, setLoading] = useState(false);
   const [photos, setPhotos] = useState([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
   const [query, setQuery] = useState("");
 
   const fetchData = async () => {
@@ -29,8 +29,11 @@ const App = () => {
       const data = await response.json();
 
       setPhotos((oldData) => {
+        if (query && page === 1) {
+          return data.results;
+        }
         if (query) {
-          return [...oldData, ...data.result];
+          return [...oldData, ...data.results];
         } else {
           return [...oldData, ...data];
         }
@@ -64,7 +67,7 @@ const App = () => {
 
   const submitHandle = (e) => {
     e.preventDefault();
-    fetchData();
+    setPage(1);
   };
 
   return (
