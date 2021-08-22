@@ -10,14 +10,19 @@ const clientID = `?client_id=${process.env.REACT_APP_ACCESS_WEB}`;
 const App = () => {
   const [loading, setLoading] = useState(false);
   const [photos, setPhotos] = useState([]);
+  const [page, setPage] = useState(1);
 
   const fetchData = async () => {
-    const url = `${mainURL}${clientID}`;
+    let urlPage = `&page=${page}`;
+    const url = `${mainURL}${clientID}${urlPage}`;
+
     try {
       setLoading(true);
       const response = await fetch(url);
       const data = await response.json();
-      setPhotos(data);
+      setPhotos((oldData) => {
+        return [...oldData, ...data];
+      });
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -27,6 +32,21 @@ const App = () => {
 
   useEffect(() => {
     fetchData();
+  }, [page]);
+
+  useEffect(() => {
+    const position = window.addEventListener("scroll", () => {
+      if (
+        !loading &&
+        window.innerHeight + window.scrollY >= document.body.scrollHeight
+      ) {
+        setPage((oldPage) => {
+          return oldPage + 1;
+        });
+      }
+    });
+
+    return () => window.removeEventListener("scroll", position);
   }, []);
 
   return (
@@ -42,7 +62,6 @@ const App = () => {
       <section className="photos">
         <div className="photos-center">
           {photos.map((item) => {
-            console.log(item);
             return <Photo key={item.id} {...item} />;
           })}
         </div>
