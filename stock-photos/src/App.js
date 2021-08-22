@@ -11,18 +11,31 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [photos, setPhotos] = useState([]);
   const [page, setPage] = useState(1);
+  const [query, setQuery] = useState("");
 
   const fetchData = async () => {
+    let url;
     let urlPage = `&page=${page}`;
-    const url = `${mainURL}${clientID}${urlPage}`;
+    let urlQuery = `&query=${query}`;
+    if (query) {
+      url = `${searchURL}${clientID}${urlPage}${urlQuery}`;
+    } else {
+      url = `${mainURL}${clientID}${urlPage}`;
+    }
 
     try {
       setLoading(true);
       const response = await fetch(url);
       const data = await response.json();
+
       setPhotos((oldData) => {
-        return [...oldData, ...data];
+        if (query) {
+          return [...oldData, ...data.result];
+        } else {
+          return [...oldData, ...data];
+        }
       });
+
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -49,12 +62,23 @@ const App = () => {
     return () => window.removeEventListener("scroll", position);
   }, []);
 
+  const submitHandle = (e) => {
+    e.preventDefault();
+    fetchData();
+  };
+
   return (
     <main>
       <section className="search">
         <form className="search-form">
-          <input type="text" className="form-input" placeholder="SEARCH" />
-          <button className="submit-btn">
+          <input
+            type="text"
+            className="form-input"
+            placeholder="SEARCH"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button className="submit-btn" onClick={submitHandle}>
             <FaSearch />
           </button>
         </form>
